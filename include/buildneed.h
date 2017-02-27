@@ -14,6 +14,7 @@
 
 char * type_prompt();
 int read_command( char**, char ***, char*);
+int buildin_command( char *, char **, int);
 
 char *prompt;
 #endif

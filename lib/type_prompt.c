@@ -38,7 +38,7 @@ char * type_prompt()
   if(homedir) {
     user_dir[0] = '~';
     for(int i = strlen(user_info->pw_dir), j = 1; i < sizeof(tmpbuffer); i++, j++) {
-    user_dir[j] = tmpbuffer[i];
+    	user_dir[j] = tmpbuffer[i];
     }
   }
   

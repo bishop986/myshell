@@ -36,10 +36,15 @@ int read_command(char **command, char*** args, char *prompt)
 			}
 		}
 	}
-    *command = buffer;
+	if(count == 0) {
+		return 0;
+	}
+
 	if(prompt != NULL) {
 		free(prompt);
 	}
+
+    *command = **args;
 	return count;
 }
 

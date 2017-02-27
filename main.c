@@ -1,6 +1,6 @@
 #include <sys/types.h>
 #include <stdio.h>
-#include </home/leo/myshell/include/buildneed.h>
+#include "./include/buildneed.h"
 
 int main()
 {
@@ -17,13 +17,18 @@ int main()
         continue;
     }
     count = read_command( &command, &args, prompt);
+	if(count == 0) {
+		continue;
+	}
+
+	if(buildin_command(command, args, count)) {
+		continue;
+	}
     
     if(fork()!=0) {
         waitpid(-1, &status, 0); 
     } else {
-		if(count != 0) {
-        	exeres = execvp(command, args);
-		}
+        exeres = execvp(command, args);
     }
 
 	if(exeres != 1) {
@@ -38,10 +43,10 @@ int main()
   prompt = type_prompt();
   count = read_command( &command, &args, prompt);
   printf("count : %d\n", count);
+  printf("command is : %s\n", command);
   for( int i = 0; i < count; i++) {
 	printf("This word is : %s\n", args[i]);
   }
-  if(command != NULL) free(command);
   #endif
   
   return 0;
